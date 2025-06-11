@@ -1,0 +1,14 @@
+//
+//  AppDelegate.h
+//  SHVideoPlayer
+//
+//  Created by york on 2025/6/11.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
+
+
+@end
+
