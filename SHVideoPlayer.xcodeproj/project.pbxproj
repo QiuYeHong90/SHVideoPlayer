@@ -40,6 +40,7 @@
 		98003AA82DF965F9002C3CBF /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98003AA72DF965F9002C3CBF /* MediaPlayer.framework */; };
 		98003AAA2DF9681A002C3CBF /* libbz2.1.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 98003AA92DF9681A002C3CBF /* libbz2.1.0.tbd */; };
 		98003AB32DF97FFC002C3CBF /* SHVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 98003AB22DF97FFC002C3CBF /* SHVideoPlayer.m */; };
+		98B785792DFA83E6006D96DB /* CheckHardwareType.c in Sources */ = {isa = PBXBuildFile; fileRef = 98B785782DFA83E6006D96DB /* CheckHardwareType.c */; };
 		AF22D4B9852D115A146D5871 /* Pods_SHVideoPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BAFBF1A606170FE3A7921A /* Pods_SHVideoPlayer.framework */; };
 /* End PBXBuildFile section */
 
@@ -214,6 +215,8 @@
 		98003AA92DF9681A002C3CBF /* libbz2.1.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.1.0.tbd; path = usr/lib/libbz2.1.0.tbd; sourceTree = SDKROOT; };
 		98003AB12DF97FFC002C3CBF /* SHVideoPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHVideoPlayer.h; sourceTree = "<group>"; };
 		98003AB22DF97FFC002C3CBF /* SHVideoPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHVideoPlayer.m; sourceTree = "<group>"; };
+		98B785772DFA83E6006D96DB /* CheckHardwareType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CheckHardwareType.h; sourceTree = "<group>"; };
+		98B785782DFA83E6006D96DB /* CheckHardwareType.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = CheckHardwareType.c; sourceTree = "<group>"; };
 		99BAFBF1A606170FE3A7921A /* Pods_SHVideoPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SHVideoPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3E82FA9BFFE37AB62103FF6 /* Pods-SHVideoPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SHVideoPlayer.debug.xcconfig"; path = "Target Support Files/Pods-SHVideoPlayer/Pods-SHVideoPlayer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -534,6 +537,8 @@
 				98003A8A2DF9633C002C3CBF /* kxmovie-Prefix.pch */,
 				98003AB12DF97FFC002C3CBF /* SHVideoPlayer.h */,
 				98003AB22DF97FFC002C3CBF /* SHVideoPlayer.m */,
+				98B785772DFA83E6006D96DB /* CheckHardwareType.h */,
+				98B785782DFA83E6006D96DB /* CheckHardwareType.c */,
 			);
 			path = kxmovie;
 			sourceTree = "<group>";
@@ -666,6 +671,7 @@
 			files = (
 				980039942DF91B05002C3CBF /* AppDelegate.mm in Sources */,
 				980039952DF91B05002C3CBF /* main.m in Sources */,
+				98B785792DFA83E6006D96DB /* CheckHardwareType.c in Sources */,
 				980039962DF91B05002C3CBF /* SceneDelegate.m in Sources */,
 				98003AB32DF97FFC002C3CBF /* SHVideoPlayer.m in Sources */,
 				98003A8C2DF9633C002C3CBF /* KxMovieDecoder.m in Sources */,

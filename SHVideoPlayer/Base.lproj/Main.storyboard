@@ -32,6 +32,14 @@
                                     <constraint firstAttribute="width" secondItem="SB1-FN-mFQ" secondAttribute="height" multiplier="16:9" id="Cay-6a-7vT"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJY-LN-07B">
+                                <rect key="frame" x="99" y="421.33333333333331" width="78.666666666666686" height="34.333333333333314"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="system"/>
+                                <connections>
+                                    <action selector="buttonSytemClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FXT-bj-2bq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -40,7 +48,9 @@
                             <constraint firstItem="Egj-cS-2NK" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="Bfk-kS-CkL"/>
                             <constraint firstItem="SB1-FN-mFQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="dVn-dB-YU8"/>
                             <constraint firstItem="Egj-cS-2NK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="12" id="fH4-94-i0T"/>
+                            <constraint firstItem="dJY-LN-07B" firstAttribute="leading" secondItem="Egj-cS-2NK" secondAttribute="trailing" constant="12" id="lL3-9o-HC2"/>
                             <constraint firstItem="SB1-FN-mFQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="s8n-Xt-XwS"/>
+                            <constraint firstItem="dJY-LN-07B" firstAttribute="centerY" secondItem="Egj-cS-2NK" secondAttribute="centerY" id="wBe-Fy-Mqu"/>
                         </constraints>
                     </view>
                     <connections>

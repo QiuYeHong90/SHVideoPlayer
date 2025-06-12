@@ -5,7 +5,12 @@
 //  Created by york on 2025/6/11.
 //
 
+
+
 #import "AppDelegate.h"
+extern "C" {
+#include "CheckHardwareType.h"
+}
 
 @interface AppDelegate ()
 
@@ -16,6 +21,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    AVHWDeviceType type = checkSupportHardwareType();
     return YES;
 }
 

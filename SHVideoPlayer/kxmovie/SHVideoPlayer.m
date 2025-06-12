@@ -755,7 +755,7 @@ _messageLabel.hidden = YES;
     if (!_glView) {
         
         LoggerVideo(0, @"fallback to use RGB video frame and UIKit");
-        [_decoder setupVideoFrameFormat:KxVideoFrameFormatRGB];
+        [_decoder setupVideoFrameFormat:KxVideoFrameFormatYUV];
         _imageView = [[UIImageView alloc] initWithFrame:bounds];
         _imageView.backgroundColor = [UIColor blackColor];
     }

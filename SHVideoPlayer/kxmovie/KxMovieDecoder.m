@@ -18,11 +18,35 @@
 #include "libavutil/pixdesc.h"
 #import "KxAudioManager.h"
 #import "KxLogger.h"
-
+#include "CheckHardwareType.h"
 ////////////////////////////////////////////////////////////////////////////////
 NSString * kxmovieErrorDomain = @"ru.kolyvan.kxmovie";
 static void FFLog(void* context, int level, const char* format, va_list args);
 
+/*********************************** FFmpeg获取GPU硬件解码帧格式的回调函数 *****************************************/
+static enum AVPixelFormat g_pixelFormat;
+/**
+ * @brief      回调函数，获取GPU硬件解码帧的格式
+ * @param s
+ * @param fmt
+ * @return
+ */
+enum AVPixelFormat get_hw_format(AVCodecContext* s, const enum AVPixelFormat* fmt)
+{
+//    Q_UNUSED(s)
+    const enum AVPixelFormat* p;
+
+    for (p = fmt; *p != -1; p++)
+    {
+        if(*p == g_pixelFormat)
+        {
+            return *p;
+        }
+    }
+
+    printf("无法获取硬件表面格式.");         // 当同时打开太多路视频时，如果超过了GPU的能力，可能会返回找不到解码帧格式
+    return AV_PIX_FMT_NONE;
+}
 static NSError * kxmovieError (NSInteger code, id info)
 {
     NSDictionary *userInfo = nil;
@@ -715,13 +739,17 @@ static int interrupt_callback(void *ctx);
 }
 
 #pragma mark - private
-
+/**
+ static AVBufferRef hw_device_ctx = NULL;
+ AVCodecContext ctx = NULL;
+ av_hwdevice_ctx_create(&hw_device_ctx, type, NULL, NULL, 0);
+ ctx->hw_device_ctx = av_buffer_ref(hw_device_ctx);
+ */
 - (BOOL) openFile: (NSString *) path
             error: (NSError **) perror
 {
     NSAssert(path, @"nil path");
     NSAssert(!_formatCtx, @"already open");
-    
     _isNetwork = isNetworkPath(path);
     
     static BOOL needNetworkInit = YES;
@@ -828,7 +856,11 @@ static int interrupt_callback(void *ctx);
 {    
     // get a pointer to the codec context for the video stream
     AVCodecContext *codecCtx = _formatCtx->streams[videoStream]->codec;
-    
+    static AVBufferRef *hw_device_ctx = NULL;
+    enum AVHWDeviceType type = checkSupportHardwareType();
+    av_hwdevice_ctx_create(&hw_device_ctx, type, NULL, NULL, 0);
+    codecCtx->hw_device_ctx = av_buffer_ref(hw_device_ctx);
+    codecCtx->get_format = get_hw_format;
     // find the decoder for the video stream
     AVCodec *codec = avcodec_find_decoder(codecCtx->codec_id);
     if (!codec)
@@ -852,6 +884,8 @@ static int interrupt_callback(void *ctx);
     
     _videoStream = videoStream;
     _videoCodecCtx = codecCtx;
+    
+    
     
     // determine fps
     
@@ -887,6 +921,13 @@ static int interrupt_callback(void *ctx);
 - (kxMovieError) openAudioStream: (NSInteger) audioStream
 {   
     AVCodecContext *codecCtx = _formatCtx->streams[audioStream]->codec;
+    
+    static AVBufferRef *hw_device_ctx = NULL;
+    enum AVHWDeviceType type = checkSupportHardwareType();
+    av_hwdevice_ctx_create(&hw_device_ctx, type, NULL, NULL, 0);
+    codecCtx->hw_device_ctx = av_buffer_ref(hw_device_ctx);
+    codecCtx->get_format = get_hw_format;
+    
     SwrContext *swrContext = NULL;
                    
     AVCodec *codec = avcodec_find_decoder(codecCtx->codec_id);
@@ -949,6 +990,12 @@ static int interrupt_callback(void *ctx);
 - (kxMovieError) openSubtitleStream: (NSInteger) subtitleStream
 {
     AVCodecContext *codecCtx = _formatCtx->streams[subtitleStream]->codec;
+    
+    static AVBufferRef *hw_device_ctx = NULL;
+    enum AVHWDeviceType type = checkSupportHardwareType();
+    av_hwdevice_ctx_create(&hw_device_ctx, type, NULL, NULL, 0);
+    codecCtx->hw_device_ctx = av_buffer_ref(hw_device_ctx);
+    codecCtx->get_format = get_hw_format;
     
     AVCodec *codec = avcodec_find_decoder(codecCtx->codec_id);
     if(!codec)
