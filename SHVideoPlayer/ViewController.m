@@ -30,7 +30,9 @@
 }
 
 - (IBAction)buttonClick:(id)sender {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"mp4"];
+//    NSString *path = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"mp4"];
+    NSString *path = @"https://cdn.aurapura.app/feed/20250314/moq8i75ka8d35q6qbb80sj6h0t-17419754955718.mp4";
+    
     [self.playerView playWithPath:path];
 }
 - (IBAction)buttonSytemClick:(id)sender {
